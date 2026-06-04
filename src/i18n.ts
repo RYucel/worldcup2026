@@ -35,7 +35,12 @@ export const translations = {
     hardestGrp: "Hardest Group",
     mostCompGrp: "Most Competitive",
     averageElo: "Avg ELO",
-    averageDiff: "Avg ELO Diff"
+    averageDiff: "Avg ELO Diff",
+    live: "LIVE / ENDED",
+    days: "d",
+    hours: "h",
+    mins: "m",
+    diffLabel: "Diff"
   },
   tr: {
     title: "Dünya Kupası 2026",
@@ -71,6 +76,11 @@ export const translations = {
     hardestGrp: "En Zorlu Grup",
     mostCompGrp: "En Çekişmeli",
     averageElo: "Ort. ELO",
-    averageDiff: "Ort. Fark"
+    averageDiff: "Ort. Fark",
+    live: "CANLI / BİTTİ",
+    days: "g",
+    hours: "sa",
+    mins: "dk",
+    diffLabel: "Fark"
   }
 };

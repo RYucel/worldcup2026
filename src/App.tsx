@@ -5,9 +5,33 @@ import { Search, Star, Moon, Sun, MapPin, BarChart3, Trophy, Globe, ShieldAlert,
 import { motion, AnimatePresence } from 'motion/react';
 import EloScatterChart from './components/EloScatterChart';
 import GroupAnalysis, { GroupStat } from './components/GroupAnalysis';
+import Countdown from './components/Countdown';
 
 const allGroups = ['ALL', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 const cardClass = "bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl shadow-sm";
+
+const translateDate = (dateStr: string, lang: Language) => {
+  if (lang === 'en') return dateStr;
+  
+  const map: Record<string, string> = {
+    'Monday': 'Pazartesi',
+    'Tuesday': 'Salı',
+    'Wednesday': 'Çarşamba',
+    'Thursday': 'Perşembe',
+    'Friday': 'Cuma',
+    'Saturday': 'Cumartesi',
+    'Sunday': 'Pazar',
+    'June': 'Haziran',
+    'July': 'Temmuz'
+  };
+
+  let translated = dateStr;
+  Object.keys(map).forEach(eng => {
+    translated = translated.replace(new RegExp(eng, 'g'), map[eng]);
+  });
+  
+  return translated;
+};
 
 export default function App() {
   const [lang, setLang] = useState<Language>('en');
@@ -301,14 +325,17 @@ export default function App() {
                     className={`p-5 transition hover:-translate-y-1 hover:shadow-xl dark:shadow-none dark:hover:shadow-lg dark:hover:shadow-black/40 ${cardClass}`}
                   >
                     <div className="flex justify-between items-start mb-3">
-                      <div className="flex items-center gap-2">
-                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 px-2 py-1 rounded-lg text-xs font-bold text-white shadow-sm">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-500 px-2 py-1 rounded-lg text-xs font-bold text-white shadow-sm w-fit">
                           {text.group} {match.group}
                         </span>
-                        <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{match.date} &middot; {match.time}</span>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{translateDate(match.date, lang).split(' ').slice(0,3).join(' ')} &middot; {match.time}</span>
+                          <Countdown dateStr={match.date} timeStr={match.time} lang={lang} />
+                        </div>
                       </div>
-                      <button onClick={() => toggleFav(matchId)} className="focus:outline-none transition-transform hover:scale-110">
-                        <Star className={isFav ? "text-yellow-500 fill-yellow-500" : "text-slate-300 dark:text-slate-600"} size={20} />
+                      <button onClick={() => toggleFav(matchId)} className="focus:outline-none transition-transform hover:scale-110 shrink-0 ml-2">
+                        <Star className={isFav ? "text-yellow-500 fill-yellow-500 drop-shadow-sm" : "text-slate-300 dark:text-slate-600"} size={20} />
                       </button>
                     </div>
 
@@ -326,7 +353,7 @@ export default function App() {
                       <div className="px-2 text-center flex flex-col items-center">
                         <div className="text-xs font-bold text-slate-400 dark:text-slate-500 mb-1">VS</div>
                         <div className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm ${edge.color}`}>
-                          {match.diff} diff
+                          {match.diff} {text.diffLabel}
                         </div>
                         <div className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mt-2">{edge.label}</div>
                       </div>
