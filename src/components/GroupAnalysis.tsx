@@ -6,6 +6,7 @@ export interface GroupStat {
   group: string;
   avgElo: number;
   avgDiff: number;
+  teams?: { name: string, elo: number }[];
 }
 
 interface Props {

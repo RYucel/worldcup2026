@@ -40,7 +40,13 @@ export const translations = {
     days: "d",
     hours: "h",
     mins: "m",
-    diffLabel: "Diff"
+    diffLabel: "Diff",
+    powerRankings: "Top 10 Power Rankings",
+    timeline: "Tournament Timeline",
+    matchesPerDay: "Matches",
+    avgDiffByDay: "Avg ELO Diff",
+    eloRating: "ELO Rating",
+    groupMembers: "Group Members"
   },
   tr: {
     title: "Dünya Kupası 2026",
@@ -81,6 +87,12 @@ export const translations = {
     days: "g",
     hours: "sa",
     mins: "dk",
-    diffLabel: "Fark"
+    diffLabel: "Fark",
+    powerRankings: "İlk 10 Güç Sıralaması",
+    timeline: "Turnuva Zaman Çizelgesi",
+    matchesPerDay: "Maçlar",
+    avgDiffByDay: "Ort. ELO Farkı",
+    eloRating: "ELO Puanı",
+    groupMembers: "Grup Üyeleri"
   }
 };

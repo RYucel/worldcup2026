@@ -5,7 +5,10 @@ import { Search, Star, Moon, Sun, MapPin, BarChart3, Trophy, Globe, ShieldAlert,
 import { motion, AnimatePresence } from 'motion/react';
 import EloScatterChart from './components/EloScatterChart';
 import GroupAnalysis, { GroupStat } from './components/GroupAnalysis';
+import TournamentInsights from './components/TournamentInsights';
+import GroupMembersViewer from './components/GroupMembersViewer';
 import Countdown from './components/Countdown';
+import InstallPWA from './components/InstallPWA';
 
 const allGroups = ['ALL', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 const cardClass = "bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl shadow-sm";
@@ -127,6 +130,7 @@ export default function App() {
         group,
         avgElo,
         avgDiff: Math.round(data.totalDiff / data.count),
+        teams: Array.from(teams.entries()).map(([name, elo]) => ({ name, elo }))
       };
     }).sort((a, b) => a.group.localeCompare(b.group));
   }, []);
@@ -204,6 +208,8 @@ export default function App() {
                 {text.favOnly}
               </button>
 
+              <InstallPWA lang={lang} />
+
               <button 
                 onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} 
                 className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition"
@@ -271,7 +277,9 @@ export default function App() {
         </div>
 
         <EloScatterChart matches={filteredMatches} lang={lang} />
+        <TournamentInsights matches={matchesData} lang={lang} />
         <GroupAnalysis stats={groupStats} lang={lang} />
+        <GroupMembersViewer stats={groupStats} lang={lang} />
 
         <div className={`p-6 mb-8 ${cardClass}`}>
           <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
