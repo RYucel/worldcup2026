@@ -25,7 +25,7 @@ export default function GroupMembersViewer({ stats, lang }: Props) {
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Avg Elo: {stat.avgElo}</span>
             </h3>
             <div className="flex flex-col gap-2">
-              {stat.teams?.sort((a, b) => b.elo - a.elo).map(team => (
+              {[...(stat.teams || [])].sort((a, b) => b.elo - a.elo).map(team => (
                 <div key={team.name} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <img src={`https://flagcdn.com/w20/${flagMap[team.name]}.png`} alt={team.name} className="w-5 h-3 object-cover rounded-sm shadow-sm" />
