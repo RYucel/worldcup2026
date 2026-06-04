@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
 export default defineConfig({
-  base: '/world-cup-app/', // Add your exact repository name here
+  base: '/worldcup2026/', // Matches the repository name for GitHub Pages
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
